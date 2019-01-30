@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body>
+  <div class="fake-backdrop-blur">
+    <span class="display-4 text-light title">Convites Zap Motorista</span>
+    <form class="box-center" id="form-invitation" style="width: calc(100% - 10px); max-width: 500px;">
+      <div class="row">
+        <div class="col-auto col-sm-12">
+          <label class="sr-only" for="inlineFormInputGroup">E-mail</label>
+          <div class="input-group input-group-lg mb-2 shadow">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input type="email" class="form-control" name="email-invitation" 
+              onblur="email = this.value"
+              placeholder="E-mail do motorista">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-success" id="btn-invite" type="button" 
+                onclick="presentModal(...(email && email != '' ? ['ATENÇÃO', `Tem certeza que deseja enviar um convite para <b>${getEmail()}</b>?`, confirmFirebaseInclude] : ['ERRO', 'Por favor, informe um email válido.<br>Ex.: <b>dinodasilva@sauro.com</b>', undefined]))">
+                convidar<i class="far fa-save ml-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop fake-backdrop-blur" style="display: none"></div>
+  <div class="modal fade" id="alert" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeModal()">
+            Cancelar
+            <i class="fas fa-times"></i>
+          </button>
+          <button type="button" class="btn btn-success" onclick="confirmModalAction()">
+            Confirmar
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+</body>
+
+</html>
